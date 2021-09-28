@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% block title %}{{b.btitle}}{% endblock title %}
+
+
+{% block style %}
+    .blogimg{
+        width : auto;
+        height : 500px;
+    }
+    .blogimg:hover{
+        box-shadow: 10px 10px 5px skyblue;
+    }
+
+    .pts{
+        margin: 5px;
+        padding: 5px;
+        box-shadow: 10px 10px 5px skyblue;
+    }
+
+    .form-control: focus {
+        color: #000
+    }
+
+    .second {
+        width: 350px;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 10px 10px 5px #aaaaaa
+    }
+
+    .text1 {
+        font-size: 13px;
+        font-weight: 500;
+        color: #56575b
+    }
+
+    .text2 {
+        font-size: 13px;
+        font-weight: 500;
+        margin-left: 6px;
+        color: #56575b
+    }
+
+    .text3 {
+        font-size: 13px;
+        font-weight: 500;
+        margin-right: 4px;
+        color: #828386
+    }
+
+
+
+    .text4 {
+        font-size: 13px;
+        font-weight: 500;
+        color: #828386
+    }
+
+
+    .thumbup {
+        font-size: 13px;
+        font-weight: 500;
+        margin-right: 5px;
+        color : blue;
+    }
+
+
+    .cmtrow{
+        margin-left : 80px;
+    }
+
+    .share .fab:hover{
+        background-color : green;
+        color : white;
+        box-shadow: 10px 10px 5px #aaaaaa
+    }
+
+    .shr {
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 0px 50px;
+    border-radius: 50%;
+    color : #2ECC71;
+    border : 2px solid #72F984;
+    }
+
+    .imgr{
+        margin-top:20px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .blogimg{
+            width : 300px;
+            height : 200px;
+        }
+        .imgr{
+            margin-top:20px;
+        }
+        .cmtrow{
+            margin-left : 0px;
+            margin-right : 0px;
+        }
+        .second {
+            width: 315px;
+        }
+        .form-control{
+            width: 315px;
+        }
+        .shr {
+            padding: 0px;
+            font-size: 30px;
+            text-align: center;
+            text-decoration: none;
+            margin: 0px 10px;
+            border-radius: 50%;
+            color : #2ECC71;
+            border : none;
+        }
+        {% comment %} .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        } {% endcomment %}
+    }
+
+{% endblock style %}
+{% block body %}
+
+
+
+<h1 class="text-center mt-3">{{b.btitle|upper}}</h1>
+
+<div class="container text-secondary"><p>Admin , {{b.date| date:"F d Y"}} , <i class="fas fa-eye"></i> {{b.views}}</p></div>
+
+{% if b.coverimg %}
+<div class="container mt-5">
+     <img class="blogimg rounded mx-auto d-block" src="/media/{{b.coverimg}}" alt="Card image cap">
+</div>
+{% endif %}
+
+<div class="container mt-5">
+    <p>{{b.desc|safe}}</p>
+</div>
+
+<div class="container-fluid">
+    {% if b.img1 %}
+    <h4 class="mt-5 pts">● {{b.point1}}</h4>
+        <div class="row imgr flex-row-reverse">
+            <div class="col-md-6 ">
+                <img class="img-thumbnail center" src="/media/{{b.img1}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>{{b.desc1|safe}}</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if b.img2 %}
+        <h4 class="mt-5 pts">● {{b.point2}}</h4>
+        <div class="row imgr">
+            <div class="col-md-6">
+                <img class="img-thumbnail" src="/media/{{b.img2}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>{{b.desc2|safe}}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if b.img3 %}
+    <h4 class="mt-5 pts">● {{b.point3}}</h4>
+        <div class="row imgr flex-row-reverse">
+            <div class="col-md-6">
+                <img class="img-thumbnail" src="/media/{{b.img3}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>{{b.desc3|safe}}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if b.img4 %}
+    <h4 class="mt-5 pts">● {{b.point4}}</h4>
+        <div class="row imgr">
+            <div class="col-md-6">
+                <img class="img-thumbnail" src="/media/{{b.img4}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>{{b.desc4|safe}}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if b.img5 %}
+    <h4 class="mt-5 pts">● {{b.point5}}</h4>
+        <div class="row imgr flex-row-reverse">
+            <div class="col-md-6">
+                <img class="img-thumbnail" src="/media/{{b.img5}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>{{b.desc5|safe}}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if b.img6 %}
+    <h4 class="mt-5 pts">● {{b.point6}}</h4>
+        <div class="row imgr">
+            <div class="col-md-6">
+                <img class="img-thumbnail" src="/media/{{b.img6}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>{{b.desc6|safe}}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if b.img7 %}
+    <h4 class="mt-5 pts">● {{b.point7}}</h4>
+        <div class="row imgr flex-row-reverse">
+            <div class="col-md-6">
+                <img class="img-thumbnail" src="/media/{{b.img7}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>{{b.desc7|safe}}</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+<!-- <div class="container mt-5">
+    <p>{{b.desc|linebreaks}}</p>
+</div> -->
+
+
+
+
+
+
+{% comment %} <div class="container-fluid mt-5 share">
+    <p>share this on : </p>
+    <a class="text-success " href="https://web.whatsapp.com/send?text=this_is_my_blog_link" target="_blank" data-action="share/whatsapp/share"><i class="fab fa-whatsapp shr"></i></a>
+</div> {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-5">
+            <form method="POST" action="/blogpage/{{b.id}}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Name</label>
+                    <input type="name" name="name" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Comment</label>
+                    <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                </div>
+                <div class="container">
+                <button type="submit" class="align-item-center btn btn-primary">Comment</button>
+            </div>
+            </form>
+        </div>
+        <div class="col mt-5 align-item-center">
+        {% for c in comment %}
+            <div class="row cmtrow ">
+                <div class="d-flex justify-content-center py-2">
+                    <div class="second py-2 px-2"> <span class="text1">{{c.cmt|safe}}</span>
+                        <div class="d-flex justify-content-between py-1 pt-2">
+                            <div><img src="" width="18"><span class="text2 text-primary">{{c.name}}</span></div>
+                            {% comment %} <div><a href="/like/{{b.id}}/{{c.id}}/{{c.like}}"><span class="text3">Like</span></a><span class="thumbup"><i class="fas fa-thumbs-up"></i></span><span class="text4">{{c.like}}</span></div> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="m-5">
+</div>
+{% endblock body %}

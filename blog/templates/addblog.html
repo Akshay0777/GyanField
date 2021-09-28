@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% block title %}Add New Blog{% endblock title %}
+
+{% block head %}
+<script src="https://cdn.tiny.cloud/1/3n7oefnmkxaazl7zyqc7b5o6zlnml5so6mxagets8qm4ga5m/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <style>
+        #desc{
+            height: 150px;
+            width: 100%;
+        }
+        #desc1,#desc1,#desc2,#desc3,#desc4,#desc5,#desc6,#desc7{
+            height: 200px;
+            width: 100%;
+        }
+    </style>
+
+
+    <script>
+      tinymce.init({
+        selector: '#desc,#desc1,#desc2,#desc3,#desc4,#desc5,#desc6,#desc7',
+        plugins: [
+        'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+        'table emoticons template paste help'
+        ],
+        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+        'bullist numlist outdent indent | link image | print preview media fullpage | ' +
+        'forecolor backcolor emoticons | help',
+        menu: {
+        favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons'}
+        },
+        menubar: 'favs file edit view insert format tools table help',
+        content_css: 'css/content.css'
+      });
+
+
+    </script>
+
+{% endblock head %}
+
+{% block body %}
+
+
+<h1 class="mb-5">Write your blog here</h1>
+    <form method="post" action="addblog">
+    {% csrf_token %}
+        <div class="container text-center">
+            <input type="text" name="title" id="" placeholder="Title of Post" required>
+        </div>
+        <label for="">Email</label>
+        <input type="email" name="email" id="" required>
+        <div style="height: 400px;" class="container text-center p-5 bg-primary">
+            <label for="">Cover Image</label>
+            <input type="file" name="coverimg" id="" required>
+        </div> 
+        <div class="container mt-5">
+            <h5>Write main description here</h5>
+            <textarea name="desc" id="desc"></textarea>
+        </div>
+
+
+
+
+
+        
+
+        <div class="container">
+            <div class="mt-5">
+                <h4>Point1 Name</h4>
+                <input type="text" name="point1" id="">
+                <div class="row">
+                    <div class="col">
+                        <h5>Write point 1 description here</h5>
+                        <textarea name="desc1" id="desc1"></textarea>
+                    </div>
+                    <div class="col text-center">
+                        <div class="m-5 bg-warning p-5">
+                            <h4>Image for point 1</h4>
+                            <input type="file" name="img1" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+
+            <div class="mt-5">
+                <h4>Point2 Name</h4>
+                <input type="text" name="point2" id="">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="m-5 bg-warning p-5">
+                            <h4>Image for point 2</h4>
+                            <input type="file" name="img2" id="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h5>Write point 2 description here</h5>
+                        <textarea name="desc2" id="desc2"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="mt-5">
+                <h4>Point3 Name</h4>
+                <input type="text" name="point3" id="">
+                <div class="row">
+                    <div class="col">
+                        <h5>Write point 3 description here</h5>
+                        <textarea name="desc3" id="desc3"></textarea>
+                    </div>
+                    <div class="col text-center">
+                        <div class="m-5 bg-warning p-5">
+                            <h4>Image for point 3</h4>
+                            <input type="file" name="img3" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="mt-5">
+                <h4>Point4 Name</h4>
+                <input type="text" name="point4" id="">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="m-5 bg-warning p-5">
+                            <h4>Image for point 4</h4>
+                            <input type="file" name="img4" id="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h5>Write point 4 description here</h5>
+                        <textarea name="desc4" id="desc4"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="mt-5">
+                <h4>Point5 Name</h4>
+                <input type="text" name="point5" id="">
+                <div class="row">
+                    <div class="col">
+                        <h5>Write point 5 description here</h5>
+                        <textarea name="desc5" id="desc5"></textarea>
+                    </div>
+                    <div class="col text-center">
+                        <div class="m-5 bg-warning p-5">
+                            <h4>Image for point 5</h4>
+                            <input type="file" name="img5" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="mt-5">
+                <h4>Point6 Name</h4>
+                <input type="text" name="point6" id="">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="m-5 bg-warning p-5">
+                            <h4>Image for point 6</h4>
+                            <input type="file" name="img6" id="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h5>Write point 6 description here</h5>
+                        <textarea name="desc6" id="desc6"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="mt-5">
+                <h4>Point7 Name</h4>
+                <input type="text" name="point7" id="">
+                <div class="row">
+                    <div class="col">
+                        <h5>Write point 7 description here</h5>
+                        <textarea name="desc7" id="desc7"></textarea>
+                    </div>
+                    <div class="col text-center">
+                        <div class="m-5 bg-warning p-5">
+                            <h4>Image for point 7</h4>
+                            <input type="file" name="img7" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <button class="m-auto bg-primary" style="width: 100%;" type="submit">Save</button>
+      
+    </form>
+
+
+
+
+
+{% endblock body %}

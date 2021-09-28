@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+
+{% block style %}
+
+    .listrow{
+        background-color: #B2EEFD     ;
+        margin-top: 30px;
+    }
+
+    .new-releases{
+        background-color: #E6F6F7;
+    }
+
+    .product-line {
+        height: 44px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 11px;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 2.8rem 0 rgb(63 79 110 / 0%);
+        transition: all .2s linear;
+    }
+    .product-line:hover {
+        box-shadow: 5px 5px 5px skyblue;
+        transform: translate(0px) scale(1.05);
+    }
+
+    a {
+        color: #4ab9d5;
+        text-decoration: none;
+    }
+
+    .products .product-line img{
+        height: 50px;
+        width: 41px;
+    }
+    .product-line .title {
+        display: inline-block;
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        width: 100%;
+        color: #4ac5e3;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .product-line .date {
+        width: 12rem;
+        margin-right: 1.5rem;
+        color: #6d737d;
+    }
+    .product-line i {
+        color: #6d737d;
+        margin-right: 1.5rem;
+        font-size: 20px;
+    }
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .card{
+        width: 17rem;
+        box-shadow: 5px 5px 5px skyblue;
+    }
+    .card:hover{
+        box-shadow: 5px 5px 5px #10b4dd;
+    }
+
+    .card-title {
+        margin-bottom: 0.3rem;
+    }
+
+    .card-body , .card-footer{
+        padding: 0.5rem;
+        margin : 0rem;
+    }
+
+    .card .li{
+        color : #10b4dd;
+    }
+
+    .card img{
+        height:180px;
+    }
+    .card-footer {
+        font-size: 0.8rem;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .card{
+            width : 80%;
+        }
+    }
+    }
+
+{% endblock style %}
+
+
+{% block js %}
+
+let previews=document.getElementsByClassName('preview');
+Array.from(previews).forEach((element)=>{
+element.innerHTML=element.innerText;
+})
+
+{% endblock js %}
+
+{% block body %}
+
+
+{% if allblog1 is not None %}
+{% if present %}
+<div class="container-fluid mt-5">
+    <h3 class="text-center mt-5">Your Searching Results</h3>
+    <div class="row ml-2">
+        {% for ab in allblog1 %}
+        <div class="card m-2 ml-4">
+            <img class="card-img-top" src="/media/{{ab.coverimg}}" alt="Card image cap">
+            <div class="card-img-overlay">
+                <a href="#" class="btn btn-light btn-sm">{{ab.tag}}</a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ab.btitle|slice:":25"}}</h5>
+                <p class="card-text"><div class="preview">{{ab.desc|truncatechars:75|safe}}</div></p>
+            </div>
+            <a href="blogpage/{{ab.id}}" class="li text-right mr-2 stretched-link">read more...</a>
+            <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                <div class="views"><i class="far fa-clock text-info"></i> {{ab.date| date:"F d Y"}}
+                </div>
+                <div class="stats">
+                    <i class="far fa-eye"></i> {{ab.views}}
+                <!-- <i class="far fa-comment"></i> 12 -->
+                </div>
+            
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div>
+    <h3 class="text-center mt-5">Your Searhed option is Not Here</h3>
+</div>
+{% endif %}
+{% endif %}
+
+
+
+<!-- blogs all list -->
+<div class="container-fluid">
+    <div class="row flex-row-reverse listrow">
+        <div class="col-md-6 col-md-push-6">
+        <h2 class="text-center">Latest News</h2>
+            <div class="products mt-2">
+                {% for n in news %}
+                    <div class="product-line">
+                        <a href="blogpage/{{n.id}}" target="_blank">
+                            <img src="/media/{{n.coverimg}}" ></a>
+                        <a class="title" href="/">{{n.news}}</a>
+                        <span class="date">{{n.date| date:"F d"}}</span> {% comment %}<a href="newspage/{{n.id}}"><i class="fas fa-external-link-alt"></i></a>{% endcomment %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-6 col-md-pull-6 new-releases">
+            <h2 class="text-center">New Releases</h2>
+            <p class="m-4 text-secondary">Stay up-to-date with all the latest additions to your library</p>
+            <div class="products">
+                {% for bg in blogs %}
+                    <div class="product-line">
+                        <a href="blogpage/{{bg.id}}" target="_blank">
+                            <img src="/media/{{bg.coverimg}}" ></a>
+                        <a class="title" href="blogpage/{{bg.id}}">{{bg.btitle}}</a>
+                        <span class="date">{{bg.date| date:"F d"}}</span><a href="blogpage/{{bg.id}}"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                {% endfor %}
+                {% comment %} <div class="product-line">
+                    <a href="https://subscription.packtpub.com/book/web_development/9781800560444/1" target="_blank"><img src="https://static.packt-cdn.com/products/9781800560444/cover/smaller" alt="React 17 Design Patterns and Best Practices - Third Edition"></a>
+                    <a class="title" target="_blank" href="https://subscription.packtpub.com/book/web_development/9781800560444/1">React 17 Design Patterns and Best Practices - Third Edition</a>
+                    <span class="date">May-21</span><i class="fas fa-cloud"></i>
+                </div> {% endcomment %}
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- blog list ends -->
+
+
+<!-- popular posts -->
+<!-- <div>
+    <div class="container-fluid mt-5">
+        <h1 class="mt-5">Populer Posts : </h1>
+        <div class="row">
+            {% for p in pop %}
+            <div class="col-md-3">
+                <div class="card m-2" style="width: 18rem;">
+                    <img class="card-img-top" src="/media/{{p.coverimg}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.btitle|truncatechars:25}}</h5>
+                        <p class="card-text"><div class="preview">{{p.desc|truncatechars:75|safe}}</div></p>
+                        <a href="blogpage/{{p.id}}" class="btn btn-outline">read more...</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %} 
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="container-fluid mt-4">
+    <h3>Our Popular Blogs</h3>
+    <div class="row ml-1">
+        {% for ab in pop %}
+        <div class="card m-2 ml-4">
+            <img class="card-img-top" src="/media/{{ab.coverimg}}" alt="Card image cap">
+            <div class="card-img-overlay">
+                <a href="#" class="btn btn-light btn-sm">{{ab.tag}}</a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ab.btitle|slice:":250"}}</h5>
+                <p class="card-text"><div class="preview">{{ab.desc|truncatechars:75|safe}}</div></p>
+            </div>
+            <a href="blogpage/{{ab.id}}" class="li text-right mr-2 stretched-link">read more...</a>
+            <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                <div class="views"><i class="far fa-clock text-info"></i> {{ab.date| date:"F d Y"}}
+                </div>
+                <div class="stats">
+                    <i class="far fa-eye"></i> {{ab.views}}
+                <!-- <i class="far fa-comment"></i> 12 -->
+                </div>
+            
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- popular posts end -->
+
+
+<!-- Cards -->
+<div>
+    <h1 class="mt-5 ml-3">Our Blogs</h1>
+    <div class="container-fluid mt-5">
+        <div class="row ml-2">
+            {% for ab in allblog %}
+            <div class="card m-2 ml-4">
+                <img class="card-img-top" src="/media/{{ab.coverimg}}" alt="Card image cap">
+                <div class="card-img-overlay">
+                    <a href="#" class="btn btn-light btn-sm">{{ab.tag}}</a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ab.btitle|slice:":25"}}</h5>
+                    <p class="card-text"><div class="preview">{{ab.desc|truncatechars:75|safe}}</div></p>
+                </div>
+                <a href="blogpage/{{ab.id}}" class="li text-right mr-2 stretched-link">read more...</a>
+                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                    <div class="views"><i class="far fa-clock text-info"></i> {{ab.date| date:"F d Y"}}
+                    </div>
+                    <div class="stats">
+                        <i class="far fa-eye"></i> {{ab.views}}
+                    <!-- <i class="far fa-comment"></i> 12 -->
+                    </div>
+                
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        
+    </div>
+</div>
+<!-- cards end -->
+
+
+
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% block title %}{{b.title}}{% endblock title %}
+
+
+{% block style %}
+.blogimg{
+    width : auto;
+    height : 500px;
+}
+.blogimg:hover{
+    box-shadow: 10px 10px 5px skyblue;
+}
+
+
+.form-control: focus {
+    color: #000
+}
+
+.second {
+    width: 350px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 10px 10px 5px #aaaaaa
+}
+
+.text1 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #56575b
+}
+
+.text2 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 6px;
+    color: #56575b
+}
+
+.text3 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 4px;
+    color: #828386
+}
+
+
+
+.text4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #828386
+}
+
+
+.thumbup {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 5px;
+    color : blue;
+}
+
+
+.cmtrow{
+    margin-left : 80px;
+}
+
+.share .fab:hover{
+    background-color : green;
+    color : white;
+    box-shadow: 10px 10px 5px #aaaaaa
+}
+
+.fab {
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0px 50px;
+  border-radius: 50%;
+  color : #2ECC71;
+  border : 2px solid #72F984;
+}
+
+@media only screen and (max-width: 600px) {
+    .blogimg{
+        width : 300px;
+        height : 200px;
+    }
+    .cmtrow{
+        margin-left : 15px;
+    }
+  }
+
+{% endblock style %}
+{% block body %}
+
+
+
+<h1 class="text-center">{{b.title|upper}}</h1>
+
+<div class="container mt-5">
+     <img class="blogimg rounded mx-auto d-block" src="/media/{{b.img}}" alt="Card image cap">
+</div>
+
+<div class="container mt-5">
+    <p>{{b.desc|linebreaks}}</p>
+</div>
+
+
+<div class="container mt-5 share">
+    <div class="row">
+        <div class="col">
+            <p>share this on : </p>
+            <a class="text-success " href="https://web.whatsapp.com/send?text=this_is_my_blog_link" target="_blank" data-action="share/whatsapp/share"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="col mt-5">
+            <p class="text-right">{{b.date}}</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-5">
+            <form method="POST" action="/blogpage/{{b.id}}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Name</label>
+                    <input type="name" name="name" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Comment</label>
+                    <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                </div>
+                <div class="container">
+                <button type="submit" class="align-item-center btn btn-primary">Comment</button>
+            </div>
+            </form>
+        </div>
+        <div class="col mt-5 align-item-center">
+        {% for c in comment %}
+            <div class="row cmtrow ">
+                <div class="d-flex justify-content-center py-2">
+                    <div class="second py-2 px-2"> <span class="text1">{{c.cmt}}</span>
+                        <div class="d-flex justify-content-between py-1 pt-2">
+                            <div><img src="" width="18"><span class="text2">{{c.name}}</span></div>
+                            <div><a href="/like/{{b.id}}/{{c.id}}/{{c.like}}"><span class="text3">Like</span></a><span class="thumbup"><i class="fas fa-thumbs-up"></i></span><span class="text4">{{c.like}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="m-5">
+</div>
+{% endblock body %}
+
+
+
